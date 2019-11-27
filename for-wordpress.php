@@ -60,18 +60,20 @@ function WPqueryTerm(string $tax = "", array $terms = array(null)){
 function ListTax(int $id, string $taxonomy = '', bool $fistonly = false, string $separator = ', '){
   $output = '';
   $terms = wp_get_object_terms( $id, $taxonomy, array( 'fields' => 'names' ) );
-  $count = count($terms);
-  asort($terms);
-  $num = 1;
-  foreach($terms as $term){
-      $output .= $term;
-      if($fistonly !== false):
-        break;
-      else:
-        $output .= $count == $num ? '' : $separator;
-        $num++;
-      endif;
-  }
+  if($terms && is_array($terms)):
+    $count = count($terms);
+    asort($terms);
+    $num = 1;
+    foreach($terms as $term){
+        $output .= $term;
+        if($fistonly !== false):
+          break;
+        else:
+          $output .= $count == $num ? '' : $separator;
+          $num++;
+        endif;
+    }
+  endif;
   return $output;
 }
 
