@@ -47,4 +47,32 @@ function WPqueryTerm(string $tax = "", array $terms = array(null)){
   return $filter;
 }
 
+
+/* LIST FILTER BY NAME
+/------------------------*/
+/**
+  * @param int $id: post id
+  * @param string $taxonomy: taxonomy name
+  * @param bool $fistonly: set true to show only the first taxonomy
+  * @param $separator $tax: capters to seperate taxonomies
+  * @return string list of all post taxonomies
+*/
+function ListTax(int $id, string $taxonomy = '', bool $fistonly = false, string $separator = ', '){
+  $output = '';
+  $terms = wp_get_object_terms( $id, $taxonomy, array( 'fields' => 'names' ) );
+  $count = count($terms);
+  asort($terms);
+  $num = 1;
+  foreach($terms as $term){
+      $output .= $term;
+      if($fistonly !== false):
+        break;
+      else:
+        $output .= $count == $num ? '' : $separator;
+        $num++;
+      endif;
+  }
+  return $output;
+}
+
 ?>
