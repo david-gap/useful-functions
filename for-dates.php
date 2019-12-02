@@ -101,4 +101,113 @@ function DateRange(string $start = "", string $end = "", string $seperator = "-"
 }
 
 
+/* GET DAY NAME
+/------------------------*/
+/**
+  * @param string $day: selected day name in english
+  * @param string $lang: current language code
+  * @return string date name translated
+  * <code>
+  * <?php
+  * $day = date('m');
+  * echo DayName($day, "de");
+  * ?>
+  * </code>
+*/
+function DayName(string $day = 'Monday', string $lang = 'en'){
+  $days = array(
+    "en" => array(
+      "Monday" => "Monday",
+      "Tuesday" => "Tuesday",
+      "Wednesday" => "Wednesday",
+      "Thursday" => "Thursday",
+      "Friday" => "Friday",
+      "Saturday" => "Saturday",
+      "Sunday" => "Sunday"
+    ),
+    "de" => array(
+      "Monday" => "Montag",
+      "Tuesday" => "Dienstag",
+      "Wednesday" => "Mittwoch",
+      "Thursday" => "Donnerstag",
+      "Friday" => "Freitag",
+      "Saturday" => "Samstag",
+      "Sunday" => "Sonntag"
+    ),
+    "fr" => array(
+      "Monday" => "Lundi",
+      "Tuesday" => "Mardi",
+      "Wednesday" => "Mercredi",
+      "Thursday" => "Jeudi",
+      "Friday" => "Vendredi",
+      "Saturday" => "Samedi",
+      "Sunday" => "Dimanche"
+    )
+  );
+  return $days[$lang][$day];
+}
+
+
+/* GET MONTH NAME
+/------------------------*/
+/**
+  * @param string $month: selected month name by month number
+  * @param string $lang: current language code
+  * @return string date name translated
+  * <code>
+  * <?php
+  * $month = date('m');
+  * echo MonthName($month, "de");
+  * ?>
+  * </code>
+*/
+function MonthName(int $month = 1, string $lang = 'en'){
+  $months = array(
+    "en" => array(
+      1 => "January",
+      2 => "February",
+      3 => "March",
+      4 => "April",
+      5 => "May",
+      6 => "June",
+      7 => "July",
+      8 => "August",
+      9 => "September",
+      10 => "October",
+      11 => "November",
+      12 => "December"
+    ),
+    "de" => array(
+      1 => "Januar",
+      2 => "Februar",
+      3 => "März",
+      4 => "April",
+      5 => "Mai",
+      6 => "Juni",
+      7 => "Juli",
+      8 => "August",
+      9 => "September",
+      10 => "Oktober",
+      11 => "November",
+      12 => "Dezember"
+    ),
+    "fr" => array(
+      1 => "Janviere",
+      2 => "fevrier",
+      3 => "mars",
+      4 => "avril",
+      5 => "mai",
+      6 => "juin",
+      7 => "juillet",
+      8 => "aout",
+      9 => "septembre",
+      10 => "octobre",
+      11 => "novembre",
+      12 => "decembre"
+    )
+  );
+  return $months[$lang][$month];
+}
+
+
 ?>
