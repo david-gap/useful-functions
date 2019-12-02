@@ -50,6 +50,17 @@ function get_browser_name() {
 }
 
 
+/* GENERATE SHORT ID
+/------------------------*/
+/**
+  * @param string $length: ID length
+  * @return string random id
+*/
+function ShortID(int $length = 10){
+    return substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyz"), 0, $length);
+}
+
+
 /* GOOGLE TAG MANAGER / ANALYTICS
 /------------------------*/
 /**
