@@ -40,13 +40,13 @@ function setChecked($value,$range) {
 
 
 /* GET POST
-/––––––––––––––––––––––––*/
+/------------------------*/
 /**
   * @param string $name: variable name
-  * @param string $default: default text for nonexistent or empty variables
+  * @param $default: default text for nonexistent or empty variables
   * @return string from called value or default text
 */
-function getPost(string $name, string $default=""){
+function getFormPost(string $name, $default=""){
     // check if given variable exists
     if(isset($_REQUEST[$name])):
       $s = $_REQUEST[$name];
