@@ -53,11 +53,18 @@ function get_browser_name() {
 /* GENERATE SHORT ID
 /------------------------*/
 /**
-  * @param string $length: ID length
+  * @param int $length: ID length
+  * @param string $type: ID chars int/letters both on default
   * @return string random id
 */
-function ShortID(int $length = 10){
+function ShortID(int $length = 10, string $type = ''){
+  if($type == 'int'):
+    return substr(str_shuffle("0123456789"), 0, $length);
+  elseif($type == 'letters'):
+    return substr(str_shuffle("abcdefghijklmnopqrstuvwxyz"), 0, $length);
+  else:
     return substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyz"), 0, $length);
+  endif;
 }
 
 
@@ -94,6 +101,49 @@ function GoogleTracking(string $trackingcode, bool $body = false){
   endif;
 
   echo $output;
+}
+
+
+/* SORT ARRAY
+/------------------------*/
+/**
+  * @param array $array: array to sort
+  * @param string $on: select column to sort by
+  * @param string $order: order direction
+  * @return array sorted array
+*/
+function MultidArraySort(array $array = array(), string $on = "0", string $order = "ASC"){
+  $new_array = array();
+  $sortable_array = array();
+  // fallback for special chars
+  $CHARsearch   = array("Ä","ä","Ö","ö","Ü","ü","ß","-");
+  $CHARreplace  = array("Ae","ae","Oe","oe","Ue","ue","ss"," ");
+  if (count($array) > 0) {
+      foreach ($array as $k => $v) {
+          if (is_array($v)) {
+              foreach ($v as $k2 => $v2) {
+                  if ($k2 == $on) {
+                      $sortable_array[$k] = str_replace($CHARsearch, $CHARreplace, $v2);
+                  }
+              }
+          } else {
+              $sortable_array[$k] = $v;
+          }
+      }
+      switch ($order) {
+          case "ASC":
+              natcasesort($sortable_array);
+          break;
+          case "DESC":
+              natcasesort($sortable_array);
+              $sortable_array = array_reverse($sortable_array, true);
+          break;
+      }
+      foreach ($sortable_array as $k => $v) {
+          $new_array[$k] = $array[$k];
+      }
+  }
+  return $new_array;
 }
 
 
